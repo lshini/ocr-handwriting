@@ -29,12 +29,12 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route("/predict", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
         file = request.files['image']
         filename = file.filename
-        file_path = os.path.join('statics', filename)
+        file_path = os.path.join('statics/', filename)
         file.save(file_path)
         test_image = tf.keras.preprocessing.image.load_img(file_path)
         src = cv2.imread(file_path)
