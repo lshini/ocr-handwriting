@@ -96,7 +96,7 @@ def predict():
 
         print("output",output)
 
-        return render_template('sec.html', pred_output=output, user_image=file_path)
+        return render_template('index.html', pred_output=output, user_image=file_path)
 
 
 if __name__ == "__main__":
