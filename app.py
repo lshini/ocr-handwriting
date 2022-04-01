@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[38]:
-
-
-#!/usr/bin/env python
-# coding: utf-8
-
 # In[ ]:
 
 
@@ -34,7 +28,7 @@ def predict():
     if request.method == 'POST':
         file = request.files['image']
         filename = file.filename
-        file_path = os.path.join('statics/', filename)
+        file_path = os.path.join('statics/user uploaded/', filename)
         file.save(file_path)
         test_image = tf.keras.preprocessing.image.load_img(file_path)
         src = cv2.imread(file_path)
@@ -44,7 +38,7 @@ def predict():
         edged = cv2.Canny(blurred, 30, 150)
         cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
-        cnts = sort_contours(cnts, method="left-to-right")[0]
+        cnts = sorted(cnts, key=lambda ctr: cv2.boundingRect(ctr)[0] + cv2.boundingRect(ctr)[1] * image.shape[2] )
         chars = []
         for c in cnts:
             # compute the bounding box of the contour
@@ -102,9 +96,8 @@ def predict():
 
         print("output",output)
 
-        return render_template('index.html', pred_output=output, user_image=file_path)
+        return render_template('sec.html', pred_output=output, user_image=file_path)
 
 
 if __name__ == "__main__":
-    app.run()
-
+    app.run(threaded=False)
