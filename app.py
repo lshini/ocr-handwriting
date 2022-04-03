@@ -99,8 +99,8 @@ def predict():
 
     print("output",output)
     
-    qno = request.form.get['qno']
-    qno = request.form.get['sno']
+    qno = request.form.get('qno')
+    sno = request.form.get('sno')
 
     ansdata = pd.read_csv("answer.csv")
     q = ansdata.index[ansdata['Qn'] == qno].tolist()[0] #convert qn no to index
