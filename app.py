@@ -112,7 +112,7 @@ def predict():
       score += 1
 
     else:
-      r = "Wrong answer of: " + str(output) + ". Correct answer is: " + str(ans)
+      r = "Wrong answer of: " + str(output) + ". Correct answer is: " + str(ans) +"."
 
     r = r + "\n" + "Score earned: " + str(score)
 
