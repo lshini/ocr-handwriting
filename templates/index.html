@@ -80,11 +80,11 @@
  
         .upload {
  
-            font-size: 20px;
+            font-size: 15px;
             background-color: rgb(255, 252, 252);
             border-radius: 20px;
             outline: none;
-            width: 315px;
+            width: 75%;
             color: rgb(0, 0, 0);
             border: 3px solid rgb(45, 47, 49);
  
@@ -92,7 +92,7 @@
  
         ::-webkit-file-upload-button {
             color: white;
-            padding: 20px;
+            padding: 10px;
             border: 2px solid #ffbd39;
             background-color:#ffbd39;
             border-radius: 15px;
@@ -100,19 +100,33 @@
         }
  
         ::-webkit-file-upload-button:hover {
-            border-radius: 20px;
+            border-radius: 18px;
             border: 2px solid #ffbd39;
  
         }
- 
-        input[type="submit"] {
+        label {
             position: absolute;
-            margin-top: 150px;
-            padding: 15px 35px;
+            left: 30%;
+        }
+        input[type="text"] {
+            position: absolute;
+            left:50%;
+            width: 20%;
+            padding: 6px 25px;
             background-color: white;
             border-radius: 15px;
             color: black;
-            font-size: 1.5rem;
+            font-size: 15px;
+        }
+
+        input[type="submit"] {
+            position: absolute;
+            margin-top: 250px;
+            padding: 10px 35px;
+            background-color: white;
+            border-radius: 15px;
+            color: black;
+            font-size: 1rem;
             border: 4px solid #ffbd39;
         }
  
@@ -180,11 +194,18 @@
              <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data" onsubmit="showloading()">
 
                 
-            </br></br><input id="file" type="file" name="image" onchange="readURL(this);" style="margin-bottom: -300px;"  class="upload">
-               
-                <input type="submit" value="Predict"style="margin-bottom: -350px;">
+                 </br></br><input id="file" type="file" name="image" onchange="readURL(this);" style="margin-bottom: -200px;"  class="upload">
+            
+                 <span style="margin-bottom: -280px; display: inline-block; vertical-align: middle;">
+                    <label style="color:white;"> Question No: </label> <input type="text" name="qno" >
+                 </span>
 
-                <img id="blah" src="https://via.placeholder.com/300/000000/000000?Text=WebsiteBuilders.com%20C/O%20https://placeholder.com/" alt="your image" height="300px" width="300px"/>
+                 <span style="margin-bottom: -380px; display: inline-block; vertical-align: middle;">       
+                    <label style="color:white;"> Student ID: </label><input type="text" name="sno">
+                 </span>
+                
+                 <input type="submit" value="Predict"style="margin-bottom: -300px;">
+                 <img id="blah" src="https://via.placeholder.com/300/000000/000000?Text=WebsiteBuilders.com%20C/O%20https://placeholder.com/" alt="your image" height="300px" width="300px" style="margin-bottom: 200px; position: center;"/>
 
  
             </form>
@@ -193,7 +214,7 @@
          <div class="col-sm">
  
             <div>
-                <h3 style="padding: 15px; background-color: #ffbd39; color: white; "
+                <h3 style="padding: 10px; background-color: #ffbd39; color: white; font-size: 24px; "
                        class="text-center mb-5 content-h3 ">
                     {{pred_output}} </h3>
 
