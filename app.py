@@ -14,6 +14,8 @@ import imutils
 import cv2
 import tensorflow as tf
 from tensorflow import keras
+import pandas as pd
+
 
 model = keras.models.load_model("OCR_Resnet_NewestModel_80.h5")
 print("model is loaded")
@@ -32,6 +34,8 @@ def predict():
     test_image = tf.keras.preprocessing.image.load_img(file_path)
     src = cv2.imread(file_path)
     print(src)
+    x,y,w,h = (510, 280 , 160 , 120)
+    src = src[y:y + h, x:x + w]
     gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edged = cv2.Canny(blurred, 30, 150)
@@ -94,8 +98,25 @@ def predict():
         output += label
 
     print("output",output)
+    
+    qno = request.form.get['qno']
+    qno = request.form.get['sno']
 
-    return render_template('index.html', pred_output=output, user_image=file_path)
+    ansdata = pd.read_csv("answer.csv")
+    q = ansdata.index[ansdata['Qn'] == qno].tolist()[0] #convert qn no to index
+    ans = ansdata.iloc[q, 1] #get answer for qn no
+
+    score=0
+    if str(output).lower() == str(ans):
+      r = "Answer is correct: " + str(output)
+      score += 1
+
+    else:
+      r = "Wrong answer of: " + str(output) + ". Correct answer is: " + str(ans)
+
+    r = r + "\n" + "Score earned: " + str(score)
+
+    return render_template('index.html', pred_output=r, user_image=file_path)
 
 
 if __name__ == "__main__":
