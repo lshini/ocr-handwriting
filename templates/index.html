@@ -84,7 +84,7 @@
             background-color: rgb(255, 252, 252);
             border-radius: 20px;
             outline: none;
-            width: 75%;
+            width: 315px;
             color: rgb(0, 0, 0);
             border: 3px solid rgb(45, 47, 49);
  
@@ -106,12 +106,13 @@
         }
         label {
             position: absolute;
-            left: 30%;
+            right: 50%;
+            padding-right: 20px
         }
         input[type="text"] {
             position: absolute;
             left:50%;
-            width: 20%;
+            width: 115px;
             padding: 6px 25px;
             background-color: white;
             border-radius: 15px;
@@ -194,18 +195,18 @@
              <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data" onsubmit="showloading()">
 
                 
-                 </br></br><input id="file" type="file" name="image" onchange="readURL(this);" style="margin-bottom: -200px;"  class="upload">
+                 </br></br><input id="file" type="file" name="image" onchange="readURL(this);" style="margin-bottom: -160px;"  class="upload">
             
-                 <span style="margin-bottom: -280px; display: inline-block; vertical-align: middle;">
+                 <span style="margin-bottom: -260px; display: inline-block; vertical-align: middle;">
                     <label style="color:white;"> Question No: </label> <input type="text" name="qno" >
                  </span>
 
-                 <span style="margin-bottom: -380px; display: inline-block; vertical-align: middle;">       
+                 <span style="margin-bottom: -360px; display: inline-block; vertical-align: middle;">       
                     <label style="color:white;"> Student ID: </label><input type="text" name="sno">
                  </span>
                 
                  <input type="submit" value="Predict"style="margin-bottom: -300px;">
-                 <img id="blah" src="https://via.placeholder.com/300/000000/000000?Text=WebsiteBuilders.com%20C/O%20https://placeholder.com/" alt="your image" height="300px" width="300px" style="margin-bottom: 200px; position: center;"/>
+                 <img id="blah" src="https://via.placeholder.com/300/000000/000000?Text=WebsiteBuilders.com%20C/O%20https://placeholder.com/" alt="your image" height="300px" width="300px" style="margin-bottom: 220px; position: center;"/>
 
  
             </form>
@@ -214,7 +215,7 @@
          <div class="col-sm">
  
             <div>
-                <h3 style="padding: 10px; background-color: #ffbd39; color: white; font-size: 24px; "
+                <h3 style="padding: 10px; background-color: #ffbd39; color: white; font-size: 22px; "
                        class="text-center mb-5 content-h3 ">
                     {{pred_output}} </h3>
 
