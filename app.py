@@ -15,6 +15,7 @@ import cv2
 import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
+from csv import writer
 
 
 model = keras.models.load_model("OCR_Resnet_NewestModel_80.h5")
@@ -108,15 +109,21 @@ def predict():
 
     score=0
     if str(output).lower() == str(ans):
-      r = "Answer is correct: " + str(output)
+      r = "Answer is correct: " + str(output) + "."
       score += 1
 
     else:
-      r = "Wrong answer of: " + str(output) + ". Correct answer is: " + str(ans) +"."
+      r = "Wrong answer: " + str(output) + ". Correct answer is: " + str(ans) + "."
 
-    r = r + "\n" + "Score earned: " + str(score)
+
+    entry = str(sno) + "," + str(qno) + "," + str(score)
+    with open('studentrecords.csv', 'a', newline='\n') as csvfile:  
+        csvfile.write('\n'+entry)  
+        # Close the file object
+        csvfile.close()
 
     return render_template('index.html', pred_output=r, user_image=file_path)
+
 
 
 if __name__ == "__main__":
